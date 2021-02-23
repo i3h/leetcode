@@ -3,8 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	x := -1.0
-	n := 2
+	x := 34.00515
+	n := -7
 	fmt.Println("x: ", x)
 	fmt.Println("n: ", n)
 	fmt.Println(myPow(x, n))
