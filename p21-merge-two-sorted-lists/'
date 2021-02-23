@@ -1,0 +1,65 @@
+package main
+
+import "fmt"
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1 == nil {
+		return l2
+	} else if l2 == nil {
+		return l1
+	}
+
+	p, q := l1, l2
+	if p.Val > q.Val {
+		p, q = q, p
+	}
+	h := p
+
+	for p.Next != nil && q.Next != nil {
+		fmt.Println("=========")
+		if q.Val < p.Next.Val {
+			t := p.Next
+			p.Next = q
+			p = p.Next
+			q = q.Next
+			p.Next = t
+			fmt.Println("p:")
+			//printList(p)
+			fmt.Println("q:")
+			//printList(q)
+			fmt.Println("h:")
+			//printList(h)
+		} else {
+			p = p.Next
+		}
+		fmt.Println("=========")
+	}
+
+	if p.Next == nil && q.Next != nil {
+		p, q = q, p
+	}
+	fmt.Println("=========")
+	fmt.Println("p:")
+	printList(p)
+	fmt.Println("q:")
+	printList(q)
+	fmt.Println("=========")
+
+	for p.Next != nil {
+		if p.Val < q.Val {
+			p = p.Next
+		} else {
+			fmt.Println("add")
+			q.Next = p.Next
+			p.Next = q
+			break
+		}
+	}
+
+	return h
+}
