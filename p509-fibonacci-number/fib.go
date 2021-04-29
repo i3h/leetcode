@@ -6,12 +6,15 @@ package main
  * f(n) = f(n-1) + f(n-2), for n > 1.
  */
 
+var CACHE = map[int]int{0: 0, 1: 1}
+
 func fib(n int) int {
-	if n == 0 {
-		return 0
+	if n < 2 {
+		return n
 	}
-	if n == 1 {
-		return 1
+	if _, ok := CACHE[n]; ok {
+		return CACHE[n]
 	}
-	return fib(n-1) + fib(n-2)
+	CACHE[n] = fib(n-1) + fib(n-2)
+	return fib(n)
 }
