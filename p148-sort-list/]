@@ -1,0 +1,39 @@
+package main
+
+import "fmt"
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func sortList(head *ListNode) *ListNode {
+	p := head.Next
+	q := p.Next.Next
+	moveAhead(p, head, q, p)
+	return head
+}
+
+func moveAhead(p *ListNode, p_prev *ListNode, q *ListNode, q_prev *ListNode) {
+	fmt.Println("p      = ", p)
+	fmt.Println("p_prev = ", p_prev)
+	fmt.Println("q      = ", q)
+	fmt.Println("q_prev = ", q_prev)
+
+	/*
+		p.Next, q.Next = q.Next, p.Next
+		if p_prev != nil {
+			p_prev.Next = q
+		}
+		q_prev.Next = p
+	*/
+	p_prev.Next = q
+	p.Next, q.Next = q.Next, p.Next
+	q_prev.Next = p
+
+	/*
+		fmt.Println()
+		fmt.Println("p      = ", p)
+		fmt.Println("q      = ", q)
+	*/
+}
